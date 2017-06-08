@@ -1,14 +1,16 @@
+# Live Demo
+
+https://small-bulbul-contacts-app.herokuapp.com/
+
 # Week 5 Assessment: Contacts App
 
-Build a contacts manager web application with Express and PostgreSQL.
+A contacts manager web application built with Express and PostgreSQL.
 
 Part of the application has already been built for you. Your job is to take it to completion.
 
-## Getting Started
+## Setup
 
 Run `$ npm run` to see the list of commands available.
-
-You will get errors when you start your server. You'll have to resolve these errors.
 
 The app uses a basic Express file structure, and includes SQL files to set up the schema and import data.
 
