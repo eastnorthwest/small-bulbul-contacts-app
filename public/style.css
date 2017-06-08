@@ -27,6 +27,7 @@ a.delete, a.delete:visited, a.delete:active {
 
 .headerStyle {
   background-color: #4990E2;
+  height: 85px;
 }
 
 .buttonStyle {
@@ -39,46 +40,47 @@ input.searchBox {
   width: 240px;
   padding-left: 10px;
   background-color: white;
-  margin-top: 18px;
+  margin-top: 38px;
 }
 
 .no-transform {
-    text-transform: none;
+  text-transform: none;
 }
 
 .full-height {
-    height: 100vh;
+  height: 100vh;
 }
 
 .container .row {
-    margin: 0px;
+  margin: 0px;
 }
 
 .content {
-    padding: 0px 20px 0px 20px;
+  padding: 0px 20px 0px 20px;
 }
 
 .form-label {
-    margin: 10px 0px 0px 0px;
+  margin: 10px 0px 0px 0px;
 }
 
 #deleteContactName {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .contactValue {
-    margin-top: 12px;
+  margin-top: 12px;
 }
 
 #map {
-    height: 395px;
-    width: 95%;
+  height: 385px;
+  width: 95%;
+  border: 1px solid #CDCDCD;
 }
 
 #contactMap {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 #mapError > div {
-    padding: 10px 20px 10px 20px;
+  padding: 10px 20px 10px 20px;
 }
