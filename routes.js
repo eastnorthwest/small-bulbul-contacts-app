@@ -1,3 +1,4 @@
+"use strict"
 const db = require('./database');
 const os = require("os");
 const bodyParser = require('body-parser');
