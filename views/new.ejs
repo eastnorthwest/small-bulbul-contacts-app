@@ -32,7 +32,7 @@
                 <label for="address">address</label>
             </div>
             <div class="col s6 input-field">
-                <textarea name="address" id="address" class="materialize-textarea" placeholder="123 Main Street                                    City, CA 94441                                 United States"></textarea>
+                <textarea name="address" id="address" class="materialize-textarea" placeholder=""></textarea>
             </div>
         </div>
         <div class="row">
@@ -62,10 +62,9 @@
     </form>
 </div>
 <script>
-  $(document).ready(function() {
-    setTimeout(() => {
-      $('select').material_select();
-    }, 1000)
+  $(document).ready(() => {
+    var placeholderAddress = '123 Main Street\nCity, CA 94441\nUnited States';
+    $('#address').attr('placeholder', placeholderAddress);
   });
 </script>
 <%include shared/footer/%>

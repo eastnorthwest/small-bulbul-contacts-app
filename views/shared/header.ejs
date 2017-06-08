@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>My Contacts</title>
@@ -9,6 +8,17 @@
     <script type="text/javascript" src="/script.js"></script>
 </head>
 <body>
+<!-- Modal Structure -->
+<div id="deleteConfirmModal" class="modal">
+    <div class="modal-content">
+        <h5>Delete Contact?</h5>
+        <p>Are you sure you want to delete the contact <span id="deleteContactName"></span>?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat deleteCancel">CANCEL</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat deleteConfirm light-blue-text">OK</a>
+    </div>
+</div>
 <div class="container">
     <div class="row headerStyle  valign-wrapper">
         <div class="col s2">

@@ -61,3 +61,24 @@ input.searchBox {
 .form-label {
     margin: 10px 0px 0px 0px;
 }
+
+#deleteContactName {
+    font-weight: bold;
+}
+
+.contactValue {
+    margin-top: 12px;
+}
+
+#map {
+    height: 395px;
+    width: 95%;
+}
+
+#contactMap {
+    padding-left: 20px;
+}
+
+#mapError > div {
+    padding: 10px 20px 10px 20px;
+}

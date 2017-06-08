@@ -2,6 +2,7 @@
 const db = require('./database');
 const os = require("os");
 const bodyParser = require('body-parser');
+const moment = require("moment");
 
 module.exports = function(app, express)
 {
@@ -80,13 +81,15 @@ module.exports = function(app, express)
           error: error,
         })
       } else {
+        var contact = contact[0];
+        contact.birthday = moment(contact.birthday).format("YYYY-MM-DD");
+        contact.address = contact.street + ' ' + contact.city + ' ' + contact.state + ' ' + contact.zip + ' ' + contact.country;
         response.render('contact', {
-          contact: contact[0]
+          contact: contact
         })
       }
     })
   })
-
 
   app.use((request, response) => {
     response.status(404).render('not_found')

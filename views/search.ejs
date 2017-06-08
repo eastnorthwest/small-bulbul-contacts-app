@@ -4,8 +4,13 @@
   <div class="contact-list">
       <% if (contacts.length) {%>
         <% contacts.forEach(function(contact){ %>
-          <div>
-            <%= contact.name %>
+          <div class="row">
+            <div class="col s10">
+              <a href="/contacts/<%= contact.id %>"><%= contact.name %></a>
+            </div>
+            <div class="col s2 right-align">
+              <a href="#" class="deleteContact red-text" id="<%= contact.id %>" name="<%= contact.name.replace(/\"/g, '\'') %>"><strong>X</strong></a>
+            </div>
           </div>
         <% }) %>
       <% } else { %>

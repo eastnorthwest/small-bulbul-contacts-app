@@ -21,7 +21,7 @@ db.prototype.query = function(sql, variables, callback){
 }
 
 db.prototype.getContacts = function(callback){
-  db.prototype.query(`SELECT * FROM contacts`, [], callback)
+  db.prototype.query(`SELECT * FROM contacts ORDER BY name`, [], callback)
 }
 
 db.prototype.getContactsByName = function(params, callback){
@@ -33,10 +33,10 @@ db.prototype.getContactById = function(params, callback){
 }
 
 db.prototype.addContact = function(params, callback){
-  params.city = "Anytown";
-  params.state = "CA";
-  params.zip = "94444";
-  params.country="United States";
+  params.city = "";
+  params.state = "";
+  params.zip = "";
+  params.country="";
   db.prototype.query(`INSERT INTO contacts 
         (name, email, phone, street, city, state, zip, country, birthday, website) 
         VALUES ($1::text, $2::text, $3::text, $4::text, $5::text, $6::text, $7::text, $8::text, $9::timestamp, $10::text)`
