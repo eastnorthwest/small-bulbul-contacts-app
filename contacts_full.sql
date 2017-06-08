@@ -1,3 +1,4 @@
+TRUNCATE contacts;
 insert into contacts (name, email, phone, street, city, state, country, zip, birthday, website) values ('Gael Broune', 'gbroune0@ebay.co.uk', '1-(650)685-6605', '0256 Clove Avenue', 'Redwood City', 'CA', 'United States', '94064', '2007-08-05 16:01:19', 'https://boston.com');
 insert into contacts (name, email, phone, street, city, state, country, zip, birthday, website) values ('Zeke Storch', 'zstorch1@163.com', '1-(937)742-8075', '71 Anniversary Hill', 'Dayton', 'OH', 'United States', '45414', '1971-09-11 22:30:42', 'https://phoca.cz');
 insert into contacts (name, email, phone, street, city, state, country, zip, birthday, website) values ('Farly Doddridge', 'fdoddridge2@theatlantic.com', '1-(203)138-7678', '552 Nelson Pass', 'Waterbury', 'CT', 'United States', '06721', '2005-09-22 05:25:06', 'https://youtube.com');

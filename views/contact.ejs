@@ -1,0 +1,11 @@
+
+<%include shared/header/%>
+  <h4><%= contact.name %></h4>
+  <div class="contact-list">
+        <% for (var property in contact){ %>
+          <div>
+            <%= property + " = " + contact[property] %>
+          </div>
+        <% } %>
+  </div>
+<%include shared/footer/%>

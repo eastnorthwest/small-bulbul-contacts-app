@@ -1,0 +1,15 @@
+
+<%include shared/header/%>
+  <h4>Search results for  '<%= name %>'</h4>
+  <div class="contact-list">
+      <% if (contacts.length) {%>
+        <% contacts.forEach(function(contact){ %>
+          <div>
+            <%= contact.name %>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No results found.</p>
+      <% } %>
+  </div>
+<%include shared/footer/%>

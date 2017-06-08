@@ -1,5 +1,63 @@
-html, body{
+html, body {
   margin: 0;
   padding: 0;
   width: 100vw;
+  background-color: #50E3C2;
+  color: #4A4A4A;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+a, a:visited, a:active {
+  color: #002653;
+}
+
+a.delete, a.delete:visited, a.delete:active {
+  color: #D0011B
+}
+
+.secondaryText {
+  color: #9B9B9B;
+}
+
+.container {
+  width: 800px;
+  margin: 0px auto;
+}
+
+.headerStyle {
+  background-color: #4990E2;
+}
+
+.buttonStyle {
+  background-color: #4990E2;
+  color: #FFFFFF;
+}
+
+input.searchBox {
+  border-radius: 5px;
+  width: 240px;
+  padding-left: 10px;
+  background-color: white;
+  margin-top: 18px;
+}
+
+.no-transform {
+    text-transform: none;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.container .row {
+    margin: 0px;
+}
+
+.content {
+    padding: 0px 20px 0px 20px;
+}
+
+.form-label {
+    margin: 10px 0px 0px 0px;
 }
