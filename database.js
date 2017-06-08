@@ -1,3 +1,4 @@
+"use strict"
 const pg = require('pg')
 const connectionString = process.env.DATABASE_URL || 'postgres://east-northwest:1234@localhost:5433/east-northwest';
 const client = new pg.Client(connectionString)
