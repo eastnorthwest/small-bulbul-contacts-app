@@ -98,7 +98,7 @@
                 });
 
                 var infowindow = new google.maps.InfoWindow({
-                  content: '<p align="left"><%= contact.street %><br/><%= contact.city %>, <%= contact.state %> <%= contact.zip %><br/><%= contact.country %></p>'
+                  content: '<p align="left"><strong><%= contact.name %></strong><br/><%= contact.street %><br/><%= contact.city %>, <%= contact.state %> <%= contact.zip %><br/><%= contact.country %></p>'
                 });
                 infowindow.open(resultsMap, marker);
             } else {

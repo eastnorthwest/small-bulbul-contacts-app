@@ -84,3 +84,7 @@ input.searchBox {
 #mapError > div {
   padding: 10px 20px 10px 20px;
 }
+
+#addressHelp {
+  padding: 10px 10px 15px 10px;
+}

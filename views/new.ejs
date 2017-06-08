@@ -2,69 +2,152 @@
 <h4>New Contact</h4>
 <div class="row">&nbsp;</div>
 <div class="row">
-    <form class="col s12" action="/contacts/add" method="GET">
+  <form class="col s12" action="/contacts/add" method="GET">
         <div class="row">
-            <div class="col s3 right-align form-label">
+            <div class="col offset-s1"></div>
+            <div class="col s2 right-align form-label">
                 <label for="name">name</label>
             </div>
-            <div class="col s6">
-                <input name="name" placeholder="Jane Smith" id="name" type="text" class="validate" validate>
+            <div class="col s8">
+                <input name="name" placeholder="Jane Smith" id="name" type="text" data-validation="required" maxlength="255" data-sanitize="trim" data-validation-error-msg="Name is required.">
             </div>
         </div>
         <div class="row">
-            <div class="col s3 right-align form-label">
+          <div class="col offset-s1"></div>
+          <div class="col s2 right-align form-label">
                 <label for="email">email</label>
             </div>
-            <div class="col s6">
-                <input name="email" placeholder="me@email.com" id="email" type="email" class="validate" validate>
+            <div class="col s8">
+                <input name="email" placeholder="me@email.com" id="email" type="email" data-validation="email" maxlength="255" data-sanitize="trim" data-validation-error-msg="Email is required.">
             </div>
         </div>
         <div class="row">
-            <div class="col s3 right-align form-label">
+          <div class="col offset-s1"></div>
+          <div class="col s2 right-align form-label">
                 <label for="phone">phone</label>
             </div>
-            <div class="col s6">
-                <input name="phone" placeholder="1(510)555-1212" id="phone" type="tel" class="validate" validate>
+            <div class="col s8">
+                <input name="phone" placeholder="1(510)555-1212" id="phone" type="text" data-validation="required" maxlength="13" data-sanitize="trim" data-validation-error-msg="Phone is required.">
             </div>
         </div>
         <div class="row">
-            <div class="col s3 right-align form-label">
+          <div class="col offset-s1"></div>
+          <div class="col s2 right-align form-label">
                 <label for="address">address</label>
             </div>
-            <div class="col s6">
-                <textarea name="address" id="address" class="materialize-textarea" placeholder=""></textarea>
+            <div class="col s8">
+                <textarea name="address" id="address" class="materialize-textarea" placeholder="" data-validation="address"  data-validation-error-msg="Address is required.  Please check address format."></textarea>
+                <div id="addressHelp" class="hide grey lighten-3">
+                  <p class="red-text text-lighten-1">Please enter address similar to the following format:</p>
+                  <p>123 Main Street<br/>San Francisco, CA 94343<br/>United States</p>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="col s3 right-align form-label">
+          <div class="col offset-s1"></div>
+          <div class="col s2 right-align form-label">
                 <label for="phone">birthday</label>
             </div>
-            <div class="col s3">
-                <input name="birthday" placeholder="1980-08-01" id="birthday" type="text" class="validate" validate>
+            <div class="col s8">
+                <input name="birthday" placeholder="1980-08-01" id="birthday" type="text" data-validation="date" maxlength="10" data-validation-optional="true" data-validation-format="yyyy-mm-dd" data-sanitize="trim" data-validation-error-msg="Please enter a valid birthdate in the format YYYY-MM-DD (Ex: 1980-01-23)">
             </div>
         </div>
         <div class="row">
-            <div class="col s3 right-align form-label">
+          <div class="col offset-s1"></div>
+          <div class="col s2 right-align form-label">
                 <label for="website">website</label>
             </div>
-            <div class="col s6">
-                <input name="website" placeholder="http://www.janesmith.com" id="website" type="url" validate>
+            <div class="col s8">
+                <input name="website" placeholder="http://www.janesmith.com" id="website" type="text" data-validation="url" maxlength="128" data-validation-optional="true" data-validation-error-msg="Please enter a valid website url in the format http://www.website.com." data-sanitize="trim">
             </div>
         </div>
         <div class="row">&nbsp;</div>
         <div class="row">
-            <div class="col s3">
+          <div class="col offset-s1"></div>
+          <div class="col s2 form-label">
             </div>
-            <div class="col s6 right-align">
+            <div class="col s8 right-align">
                 <button class="btn buttonStyle">Create Contact</button>
             </div>
         </div>
+      <input type="hidden" name="street" id="street"/>
+      <input type="hidden" name="city" id="city"/>
+      <input type="hidden" name="state" id="state"/>
+      <input type="hidden" name="zip" id="zip"/>
+      <input type="hidden" name="country" id="country"/>
     </form>
 </div>
 <script>
-  $(document).ready(() => {
+  $(document).ready(function() {
+
+    // setup placeholder for address format
     var placeholderAddress = '123 Main Street\nCity, CA 94441\nUnited States';
-    $('#address').attr('placeholder', placeholderAddress);
+    $('#address').attr('placeholder', placeholderAddress)
+    .on('focus', () => {
+      $("#addressHelp").removeClass("hide");
+    }).on('blur', () => {
+      $("#addressHelp").addClass("hide");
+    });
+
+    // Custom validation rule for address
+    $.formUtils.addValidator({
+      name : 'address',
+      validatorFunction : function(value, $el, config, language, $form) {
+        var parts = value.split('\n');
+        if (parts.length != 3) {
+          console.log("Error: Address lines are incomplete")
+          return false;
+        }
+
+        // confirm comma is on 'lastline'
+        var checkForComma = parts[1].split(/\,/g);
+        if (checkForComma.length != 2) {
+          console.log("Error: No comma is available")
+          return false;
+        }
+
+        var request = new XMLHttpRequest();
+        request.open('GET', "https://us-street.api.smartystreets.com/street-address?auth-id=fe5ea3f2-f8a3-f9d1-7628-f21456d89daf&auth-token=3UvUbPguXCsMPdheEEhf&street=" +
+            encodeURIComponent(parts[0]) + '&lastline=' + encodeURIComponent(parts[1]), false);  // `false` makes the request synchronous
+        request.send(null);
+
+        if (request.status === 200) {
+          try {
+            var result = JSON.parse(request.responseText);
+          } catch (e) {
+            console.log("Error: invalid object from validation API")
+            return false;
+          }
+
+          if (result.length && parts[2]) {
+
+            var zipStateParts = checkForComma[1].trim().split(/ /g);
+
+            // if state is not entered as 'CA'
+            if (zipStateParts.length > 2 || zipStateParts[0].length != 2) {
+              console.log("Error: State is not entered as CA")
+              return false;
+            }
+
+            $("#country").val(parts[2]);
+            $("#street").val(parts[0]);
+            $("#city").val(checkForComma[0]);
+            $("#zip").val(zipStateParts[1])
+            $("#state").val(zipStateParts[0]);
+
+            return true;
+          }
+        }
+        return false;
+      }
+    });
+
+    $.validate({
+      lang: 'en',
+      validateOnBlur : false, // disable validation when input looses focus
+      errorMessagePosition : 'top', // Instead of 'inline' which is default
+      scrollToTopOnError : true // Set this property to true on longer forms
+    });
   });
 </script>
 <%include shared/footer/%>

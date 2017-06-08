@@ -1,16 +1,16 @@
 "use strict"
-const pg = require('pg')
+const pg = require('pg');
 const connectionString = process.env.DATABASE_URL || 'postgres://east-northwest:1234@localhost:5433/east-northwest';
-const client = new pg.Client(connectionString)
+const client = new pg.Client(connectionString);
+const moment = require('moment');
+
 client.connect();
 
 let db = function() {};
 
 db.prototype.query = function(sql, variables, callback){
-  console.log('QUERY ->', sql.replace(/[\n\s]+/g, ' '), variables)
   client.query(sql, variables, function(error, result){
     if (error){
-      console.log('QUERY <- !!ERROR!!')
       console.error(error)
       callback(error)
     }else{
@@ -33,15 +33,23 @@ db.prototype.getContactById = function(params, callback){
 }
 
 db.prototype.addContact = function(params, callback){
-  params.city = "";
-  params.state = "";
-  params.zip = "";
-  params.country="";
+  var fields = ['name', 'email', 'phone', 'street', 'city', 'state', 'zip', 'country', 'website'];
+  var types = ['$1::text', '$2::text', '$3::text', '$4::text', '$5::text', '$6::text', '$7::text', '$8::text', '$9::text'];
+  if (params.birthday)
+  {
+    params.birthday = moment(params.birthday, "YYYY-MM-DD").format();
+    fields.push('birthday');
+    types.push('$10::timestamp');
+  }
+  var values = [];
+  fields.forEach((field) => {
+    values.push(params[field]);
+  });
+  console.log(fields, types, values);
   db.prototype.query(`INSERT INTO contacts 
-        (name, email, phone, street, city, state, zip, country, birthday, website) 
-        VALUES ($1::text, $2::text, $3::text, $4::text, $5::text, $6::text, $7::text, $8::text, $9::timestamp, $10::text)`
-      , [params.name, params.email, params.phone, params.address, params.city, params.state, params.zip, params.country, params.birthday, params.website],
-      callback)
+        (` + fields.join(',') + `)
+        VALUES (` + types.join(',') + `)`
+      ,values ,callback);
 }
 
 db.prototype.getLastAddedContact = function(callback){

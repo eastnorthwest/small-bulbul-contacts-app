@@ -82,7 +82,7 @@ module.exports = function(app, express)
         })
       } else {
         var contact = contact[0];
-        contact.birthday = moment(contact.birthday).format("YYYY-MM-DD");
+        contact.birthday = contact.birthday ? moment(contact.birthday).format("YYYY-MM-DD") : '';
         contact.address = contact.street + ' ' + contact.city + ' ' + contact.state + ' ' + contact.zip + ' ' + contact.country;
         response.render('contact', {
           contact: contact
